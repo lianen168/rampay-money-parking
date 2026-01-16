@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rampay.money - Blockchain AI Fiat Payment Domain for Sale</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --payment-blue: #0066ff;
+            --ai-green: #00ff9d;
+            --money-gold: #ffd700;
+            --blockchain-purple: #8a2be2;
+            --x402-red: #ff3366;
+            --dark-bg: #0a0f1a;
+            --card-bg: rgba(20, 30, 50, 0.9);
+            --grid-color: rgba(0, 102, 255, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: #e8f4ff;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            overflow-x: hidden;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(0, 102, 255, 0.15) 0%, transparent 25%),
+                radial-gradient(circle at 80% 70%, rgba(0, 255, 157, 0.1) 0%, transparent 25%),
+                linear-gradient(45deg, transparent 49%, var(--grid-color) 49%, var(--grid-color) 51%, transparent 51%),
+                linear-gradient(-45deg, transparent 49%, var(--grid-color) 49%, var(--grid-color) 51%, transparent 51%);
+            background-size: 100% 100%, 100% 100%, 60px 60px, 60px 60px;
+        }
+        
+        .money-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 215, 0, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 215, 0, 0.05) 1px, transparent 1px);
+            background-size: 80px 80px;
+            z-index: 1;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 25px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 40px 0;
+            border-bottom: 2px solid rgba(0, 102, 255, 0.4);
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--payment-blue), var(--ai-green), var(--money-gold), var(--x402-red));
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .logo-icon {
+            width: 70px;
+            height: 70px;
+            background: conic-gradient(from 0deg, var(--payment-blue), var(--ai-green), var(--money-gold), var(--payment-blue));
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 102, 255, 0.5);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+        
+        .logo-icon::before {
+            content: '$';
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--money-gold);
+            z-index: 2;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        }
+        
+        .logo-icon::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%);
+            animation: money-shine 3s infinite linear;
+        }
+        
+        .logo-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3.2rem;
+            font-weight: 900;
+            background: linear-gradient(90deg, var(--payment-blue), var(--money-gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
+            line-height: 1;
+        }
+        
+        .logo-subtitle {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            color: var(--ai-green);
+            margin-top: 8px;
+            letter-spacing: 3px;
+        }
+        
+        .payment-badge {
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid var(--payment-blue);
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            color: var(--ai-green);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            letter-spacing: 1px;
+            box-shadow: 0 0 25px rgba(0, 102, 255, 0.4);
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 60px 0 80px;
+            position: relative;
+        }
+        
+        .hero-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 4rem;
+            margin-bottom: 30px;
+            line-height: 1.2;
+            color: transparent;
+            background: linear-gradient(90deg, var(--payment-blue), var(--ai-green), var(--money-gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+        }
+        
+        .hero-title span {
+            color: var(--money-gold);
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+        
+        .x402-badge {
+            display: inline-block;
+            background: rgba(255, 51, 102, 0.2);
+            border: 2px solid var(--x402-red);
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2rem;
+            color: var(--x402-red);
+            font-weight: 700;
+            margin: 20px 0 40px;
+            letter-spacing: 2px;
+        }
+        
+        .hero-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.5rem;
+            color: #c2e5ff;
+            max-width: 1000px;
+            margin: 0 auto 60px;
+            line-height: 1.8;
+        }
+        
+        .highlight {
+            color: var(--ai-green);
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(0, 255, 157, 0.5);
+        }
+        
+        .money-highlight {
+            color: var(--money-gold);
+            font-weight: 900;
+        }
+        
+        .protocol-highlight {
+            color: var(--x402-red);
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        /* Payment Visualization */
+        .payment-visual {
+            width: 100%;
+            max-width: 1000px;
+            height: 400px;
+            margin: 70px auto 90px;
+            position: relative;
+            background: rgba(10, 20, 40, 0.8);
+            border-radius: 25px;
+            overflow: hidden;
+            border: 3px solid rgba(0, 102, 255, 0.4);
+            box-shadow: 
+                inset 0 0 60px rgba(0, 102, 255, 0.2),
+                0 0 70px rgba(0, 102, 255, 0.3);
+        }
+        
+        .currency-flow {
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            top: 10%;
+            left: 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .currency-column {
+            flex: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .currency-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+            position: relative;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            animation: currency-float 3s infinite ease-in-out;
+        }
+        
+        .usd-icon {
+            background: linear-gradient(135deg, #0a9929, #0dff4a);
+            border: 3px solid #00ff9d;
+        }
+        
+        .eur-icon {
+            background: linear-gradient(135deg, #002395, #009cde);
+            border: 3px solid #0066ff;
+        }
+        
+        .cny-icon {
+            background: linear-gradient(135deg, #de2910, #ffde00);
+            border: 3px solid #ffd700;
+        }
+        
+        .jpy-icon {
+            background: linear-gradient(135deg, #bc002d, #ffffff);
+            border: 3px solid #ff3366;
+        }
+        
+        .flow-arrows {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        
+        .flow-arrow {
+            position: absolute;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--ai-green), var(--payment-blue));
+            border-radius: 2px;
+            animation: flow-move 4s linear infinite;
+        }
+        
+        .ai-processor {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(0, 255, 157, 0.3) 0%, rgba(0, 255, 157, 0.1) 70%);
+            border-radius: 50%;
+            border: 3px solid var(--ai-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 50px rgba(0, 255, 157, 0.5);
+        }
+        
+        .ai-core {
+            width: 80px;
+            height: 80px;
+            background: conic-gradient(from 0deg, var(--ai-green), var(--payment-blue), var(--x402-red), var(--ai-green));
+            border-radius: 50%;
+            animation: ai-spin 5s linear infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .ai-core::before {
+            content: 'AI';
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: white;
+            background: rgba(0, 0, 0, 0.7);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Domain Value */
+        .value-section {
+            background: rgba(20, 30, 60, 0.9);
+            border-radius: 25px;
+            padding: 70px 60px;
+            margin: 80px 0;
+            border: 3px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.2);
+        }
+        
+        .value-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 70px;
+            color: var(--money-gold);
+            text-shadow: 0 0 25px rgba(255, 215, 0, 0.5);
+        }
+        
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .value-card {
+            background: rgba(30, 40, 70, 0.9);
+            border-radius: 20px;
+            padding: 45px 35px;
+            border: 2px solid rgba(0, 102, 255, 0.3);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(0, 102, 255, 0.3);
+            border-color: var(--payment-blue);
+        }
+        
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--payment-blue), var(--ai-green));
+        }
+        
+        .card-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 3rem;
+            color: var(--money-gold);
+            margin-bottom: 25px;
+            font-weight: 900;
+            opacity: 0.8;
+        }
+        
+        .card-heading {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            color: var(--ai-green);
+            margin-bottom: 25px;
+        }
+        
+        .card-desc {
+            color: #c2e5ff;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        
+        /* Pricing */
+        .pricing-section {
+            background: rgba(20, 30, 60, 0.9);
+            border-radius: 25px;
+            padding: 80px 70px;
+            margin: 90px 0;
+            text-align: center;
+            border: 3px solid rgba(0, 255, 157, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pricing-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 40px;
+            color: var(--ai-green);
+            text-shadow: 0 0 25px rgba(0, 255, 157, 0.5);
+        }
+        
+        .total-price {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 5.5rem;
+            font-weight: 900;
+            color: var(--money-gold);
+            margin: 50px 0;
+            text-shadow: 0 0 50px rgba(255, 215, 0, 0.7);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .total-price::before, .total-price::after {
+            content: '💸';
+            position: absolute;
+            font-size: 3rem;
+            top: 50%;
+            transform: translateY(-50%);
+            animation: money-spin 3s infinite linear;
+        }
+        
+        .total-price::before {
+            left: -70px;
+        }
+        
+        .total-price::after {
+            right: -70px;
+        }
+        
+        .payment-note {
+            color: var(--x402-red);
+            font-size: 1.4rem;
+            margin: 30px 0 70px;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+        }
+        
+        .payment-plan {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 35px;
+            margin: 80px 0 50px;
+        }
+        
+        .payment-phase {
+            flex: 1;
+            min-width: 320px;
+            max-width: 350px;
+            background: rgba(30, 40, 80, 0.9);
+            border-radius: 20px;
+            padding: 45px 35px;
+            border: 2px solid rgba(138, 43, 226, 0.4);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .payment-phase:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 60px rgba(138, 43, 226, 0.5);
+            border-color: var(--blockchain-purple);
+        }
+        
+        .phase-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--payment-blue), var(--ai-green));
+            color: var(--dark-bg);
+            border-radius: 50%;
+            font-weight: 900;
+            margin-bottom: 25px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            border: 3px solid var(--money-gold);
+        }
+        
+        .phase-price {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            color: var(--ai-green);
+            font-weight: 700;
+            margin: 20px 0;
+        }
+        
+        .phase-desc {
+            color: #c2e5ff;
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+        
+        .price-note {
+            color: var(--payment-blue);
+            font-size: 1.3rem;
+            margin-top: 60px;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        /* Contact */
+        .contact-section {
+            background: rgba(20, 30, 60, 0.9);
+            border-radius: 25px;
+            padding: 80px 70px;
+            margin: 90px 0;
+            text-align: center;
+            border: 3px solid rgba(255, 215, 0, 0.3);
+        }
+        
+        .contact-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 50px;
+            color: var(--money-gold);
+            text-shadow: 0 0 25px rgba(255, 215, 0, 0.5);
+        }
+        
+        .x402-quote {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.6rem;
+            color: var(--x402-red);
+            max-width: 900px;
+            margin: 0 auto 60px;
+            padding: 30px;
+            border: 2px solid rgba(255, 51, 102, 0.4);
+            border-radius: 20px;
+            background: rgba(255, 51, 102, 0.1);
+            font-style: italic;
+        }
+        
+        .contact-email {
+            display: inline-flex;
+            align-items: center;
+            gap: 30px;
+            font-size: 2.2rem;
+            color: var(--money-gold);
+            background: rgba(255, 215, 0, 0.1);
+            padding: 28px 55px;
+            border-radius: 18px;
+            text-decoration: none;
+            margin: 50px 0 70px;
+            transition: all 0.3s;
+            border: 3px solid rgba(255, 215, 0, 0.4);
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: 2px;
+        }
+        
+        .contact-email:hover {
+            background: rgba(255, 215, 0, 0.2);
+            transform: scale(1.08);
+            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.4);
+        }
+        
+        .contact-note {
+            color: var(--ai-green);
+            font-size: 1.3rem;
+            margin-top: 40px;
+        }
+        
+        .future-note {
+            color: var(--payment-blue);
+            font-size: 1.5rem;
+            margin-top: 60px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 80px 0 70px;
+            border-top: 3px solid rgba(0, 102, 255, 0.2);
+            color: #8bdfff;
+            font-size: 1.1rem;
+        }
+        
+        .footer-logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--payment-blue);
+            margin-bottom: 30px;
+            text-shadow: 0 0 30px rgba(0, 102, 255, 0.5);
+        }
+        
+        .payment-symbols {
+            font-size: 2.5rem;
+            color: var(--ai-green);
+            margin: 40px 0;
+            letter-spacing: 25px;
+        }
+        
+        /* Animations */
+        @keyframes money-shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        @keyframes currency-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes flow-move {
+            0% { transform: translateX(-100px); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateX(800px); opacity: 0; }
+        }
+        
+        @keyframes ai-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes money-spin {
+            0% { transform: translateY(-50%) rotate(0deg); }
+            100% { transform: translateY(-50%) rotate(360deg); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            
+            .logo-text {
+                font-size: 2.8rem;
+            }
+            
+            .payment-visual {
+                height: 350px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .logo-text {
+                font-size: 2.4rem;
+            }
+            
+            .value-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .payment-visual {
+                height: 300px;
+            }
+            
+            .payment-plan {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .payment-phase {
+                width: 100%;
+                max-width: 450px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 35px;
+                text-align: center;
+                padding: 35px 0;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.3rem;
+            }
+            
+            .logo-text {
+                font-size: 2.2rem;
+            }
+            
+            .logo-icon {
+                width: 65px;
+                height: 65px;
+            }
+            
+            .logo-icon::before {
+                font-size: 28px;
+            }
+            
+            .payment-badge {
+                padding: 13px 25px;
+                font-size: 1rem;
+            }
+            
+            .payment-visual {
+                height: 250px;
+                margin: 60px auto 80px;
+            }
+            
+            .total-price {
+                font-size: 4.5rem;
+            }
+            
+            .contact-email {
+                font-size: 1.8rem;
+                padding: 25px 45px;
+            }
+            
+            .value-title,
+            .pricing-title,
+            .contact-title {
+                font-size: 2.5rem;
+            }
+            
+            .pricing-section,
+            .contact-section,
+            .value-section {
+                padding: 70px 40px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .logo-text {
+                font-size: 1.9rem;
+            }
+            
+            .logo-icon {
+                width: 55px;
+                height: 55px;
+            }
+            
+            .logo-icon::before {
+                font-size: 24px;
+            }
+            
+            .payment-badge {
+                padding: 11px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .value-title,
+            .pricing-title,
+            .contact-title {
+                font-size: 2.2rem;
+            }
+            
+            .total-price {
+                font-size: 3.5rem;
+            }
+            
+            .footer-logo {
+                font-size: 2.8rem;
+            }
+            
+            .payment-symbols {
+                font-size: 2rem;
+                letter-spacing: 15px;
+            }
+            
+            .container {
+                padding: 0 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="money-grid"></div>
+    
+    <div class="container">
+        <header>
+            <div class="logo">
+                <div class="logo-icon"></div>
+                <div>
+                    <div class="logo-text">RAMPAY.MONEY</div>
+                    <div class="logo-subtitle">RAMP + PAY + MONEY | 6 CHARACTERS</div>
+                </div>
+            </div>
+            <div class="payment-badge">
+                <i class="fab fa-ethereum"></i> BLOCKCHAIN AI FIAT PAYMENT
+            </div>
+        </header>
+        
+        <main>
+            <section class="hero">
+                <h1 class="hero-title">The Future of <span>Intelligent Fiat Exchange</span> is Here</h1>
+                
+                <div class="x402-badge">
+                    <i class="fas fa-bolt"></i> X402 PROTOCOL READY
+                </div>
+                
+                <p class="hero-subtitle">
+                    <span class="highlight">Rampay.money</span> represents the next evolution in financial technology - where <span class="highlight">blockchain ramp services</span> meet <span class="money-highlight">AI-powered fiat exchange</span>. 
+                    As <span class="protocol-highlight">X402 protocol</span> redefines payment infrastructure, this domain is perfect for intelligent currency conversion platforms, 
+                    smart cross-border payments, and AI-driven financial services that make <span class="money-highlight">money movement frictionless</span> across global markets.
+                </p>
+                
+                <div class="payment-visual" id="paymentVisual">
+                    <div class="currency-flow">
+                        <div class="currency-column">
+                            <div class="currency-icon usd-icon">$</div>
+                            <div class="currency-icon eur-icon">€</div>
+                        </div>
+                        <div class="currency-column">
+                            <div class="currency-icon cny-icon">¥</div>
+                            <div class="currency-icon jpy-icon">¥</div>
+                        </div>
+                    </div>
+                    <div class="flow-arrows" id="flowArrows"></div>
+                    <div class="ai-processor">
+                        <div class="ai-core"></div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="value-section">
+                <h2 class="value-title">Why Rampay.money is Revolutionary</h2>
+                
+                <div class="value-grid">
+                    <div class="value-card">
+                        <div class="card-number">01</div>
+                        <div class="card-heading">Blockchain Ramp Services</div>
+                        <div class="card-desc">
+                            "Ramp" in crypto means fiat-to-crypto on/off ramps - the critical bridge between traditional finance and blockchain. This domain perfectly captures the core service of modern fintech.
+                        </div>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="card-number">02</div>
+                        <div class="card-heading">AI-Powered Exchange</div>
+                        <div class="card-desc">
+                            Future currency exchange will be intelligent - predicting market movements, optimizing conversion timing, and minimizing fees through machine learning algorithms.
+                        </div>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="card-number">03</div>
+                        <div class="card-heading">X402 Protocol Future</div>
+                        <div class="card-desc">
+                            The X402 protocol represents the next generation of payment infrastructure - faster, smarter, and more secure. This domain positions you at the forefront of this revolution.
+                        </div>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="card-number">04</div>
+                        <div class="card-heading">.money TLD Advantage</div>
+                        <div class="card-desc">
+                            The .money extension immediately communicates financial purpose. Combined with "rampay," it creates a powerful brand for fiat payment and exchange services.
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="pricing-section">
+                <h2 class="pricing-title">Domain Investment & Payment Plan</h2>
+                <div class="total-price">$3,690</div>
+                
+                <p class="payment-note">
+                    <i class="fas fa-exchange-alt"></i> 369 Represents the Complete Cycle of Fiat Exchange - Entry, Processing, Settlement
+                </p>
+                
+                <div class="payment-plan" id="paymentPlan">
+                    <!-- 3 phases will be generated by JavaScript -->
+                </div>
+                
+                <p class="price-note">
+                    <i class="fas fa-shield-alt"></i> All transactions secured through Escrow.com with blockchain verification. 3-phase payment aligns with financial processing cycles.
+                </p>
+            </section>
+            
+            <section class="contact-section">
+                <h2 class="contact-title">Own the Future of Fiat Payment</h2>
+                
+                <div class="x402-quote">
+                    "X402 protocol will revolutionize how money moves globally. AI-powered ramp services will make currency exchange as easy as sending a text message."
+                </div>
+                
+                <p style="font-size: 1.4rem; color: #c2e5ff; max-width: 950px; margin: 0 auto 50px;">
+                    Contact me to acquire Rampay.money for your fintech startup, blockchain payment platform, or AI-driven financial service.
+                </p>
+                
+                <a href="mailto:joshua369x@gmail.com" class="contact-email">
+                    <i class="fas fa-credit-card"></i>
+                    joshua369x@gmail.com
+                </a>
+                
+                <p class="contact-note">
+                    Include details about your fintech project or payment platform. I respond to serious financial technology inquiries within 24 hours.
+                </p>
+                
+                <div class="future-note">
+                    <i class="fas fa-chart-line"></i> 6-character .money domains with blockchain-AI significance are exceptionally valuable
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <div class="footer-logo">RAMPAY.MONEY</div>
+            <p>The Ultimate Domain for Blockchain AI Fiat Payment & Exchange</p>
+            <div class="payment-symbols">💳 💰 📈</div>
+            <p style="margin-top: 40px;">&copy; 2023 Rampay.money Domain Sale. All rights reserved.</p>
+            <p style="margin-top: 30px; font-size: 1rem; color: var(--ai-green);">Domain sale by owner | For fintech and blockchain payment projects only</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 创建货币流动箭头
+            const flowArrows = document.getElementById('flowArrows');
+            
+            // 创建多个流动箭头
+            for(let i = 0; i < 8; i++) {
+                const arrow = document.createElement('div');
+                arrow.className = 'flow-arrow';
+                
+                // 随机位置和方向
+                const startY = Math.random() * 80 + 10;
+                const delay = Math.random() * 4;
+                const duration = Math.random() * 2 + 3;
+                
+                arrow.style.top = `${startY}%`;
+                arrow.style.left = `-100px`;
+                arrow.style.animationDelay = `${delay}s`;
+                arrow.style.animationDuration = `${duration}s`;
+                
+                // 随机颜色
+                const colors = [
+                    'linear-gradient(90deg, #00ff9d, #0066ff)',
+                    'linear-gradient(90deg, #ffd700, #ff3366)',
+                    'linear-gradient(90deg, #8a2be2, #00ff9d)'
+                ];
+                arrow.style.background = colors[i % colors.length];
+                
+                flowArrows.appendChild(arrow);
+            }
+            
+            // 添加货币交易数据点
+            const paymentVisual = document.getElementById('paymentVisual');
+            
+            for(let i = 0; i < 15; i++) {
+                const dataPoint = document.createElement('div');
+                dataPoint.style.position = 'absolute';
+                dataPoint.style.width = '20px';
+                dataPoint.style.height = '20px';
+                dataPoint.style.borderRadius = '50%';
+                dataPoint.style.background = 'rgba(255, 215, 0, 0.2)';
+                dataPoint.style.border = '1px solid rgba(255, 215, 0, 0.4)';
+                dataPoint.style.boxShadow = '0 0 15px rgba(255, 215, 0, 0.3)';
+                dataPoint.style.pointerEvents = 'none';
+                
+                // 随机位置
+                const left = Math.random() * 90 + 5;
+                const top = Math.random() * 90 + 5;
+                dataPoint.style.left = `${left}%`;
+                dataPoint.style.top = `${top}%`;
+                
+                // 浮动动画
+                dataPoint.style.animation = `data-pulse ${Math.random() * 5 + 3}s infinite ease-in-out`;
+                
+                paymentVisual.appendChild(dataPoint);
+            }
+            
+            // 添加数据脉冲动画
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes data-pulse {
+                    0%, 100% { transform: scale(1); opacity: 0.3; }
+                    50% { transform: scale(1.5); opacity: 0.7; }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // 创建3期付款计划
+            const paymentPlan = document.getElementById('paymentPlan');
+            const phaseDescriptions = [
+                "Initial deposit to secure this premium fintech domain",
+                "Mid-phase payment during platform development",
+                "Final payment for complete ownership transfer"
+            ];
+            
+            for(let i = 1; i <= 3; i++) {
+                const phase = document.createElement('div');
+                phase.className = 'payment-phase';
+                
+                phase.innerHTML = `
+                    <div class="phase-number">${i}</div>
+                    <div class="phase-price">$1,230</div>
+                    <div class="phase-desc">${phaseDescriptions[i-1]}</div>
+                `;
+                
+                // 添加悬停效果
+                phase.addEventListener('mouseenter', function() {
+                    this.style.borderColor = '#00ff9d';
+                    this.style.boxShadow = '0 0 70px rgba(0, 255, 157, 0.6)';
+                });
+                
+                phase.addEventListener('mouseleave', function() {
+                    this.style.borderColor = 'rgba(138, 43, 226, 0.4)';
+                    this.style.boxShadow = '0 0 60px rgba(138, 43, 226, 0.5)';
+                });
+                
+                paymentPlan.appendChild(phase);
+            }
+            
+            // 添加背景货币符号
+            const body = document.body;
+            const moneySymbols = ['💵', '💶', '💷', '💴', '💰', '💸', '💳', '🏦', '📈', '💎'];
+            
+            for(let i = 0; i < 25; i++) {
+                const symbol = document.createElement('div');
+                symbol.style.position = 'fixed';
+                symbol.style.zIndex = '2';
+                symbol.style.pointerEvents = 'none';
+                
+                // 随机位置
+                symbol.style.left = Math.random() * 100 + 'vw';
+                symbol.style.top = Math.random() * 100 + 'vh';
+                
+                // 随机符号
+                const randomSymbol = moneySymbols[Math.floor(Math.random() * moneySymbols.length)];
+                symbol.textContent = randomSymbol;
+                
+                // 随机大小和透明度
+                const size = Math.random() * 30 + 20;
+                symbol.style.fontSize = `${size}px`;
+                symbol.style.opacity = Math.random() * 0.1 + 0.05;
+                
+                // 浮动动画
+                symbol.style.animation = `money-float ${Math.random() * 30 + 20}s infinite linear`;
+                
+                body.appendChild(symbol);
+            }
+            
+            // 添加货币浮动动画
+            const moneyStyle = document.createElement('style');
+            moneyStyle.textContent = `
+                @keyframes money-float {
+                    0% { transform: translateY(0) rotate(0deg); opacity: 0.05; }
+                    25% { transform: translateY(-30px) rotate(90deg); opacity: 0.1; }
+                    50% { transform: translateY(-60px) rotate(180deg); opacity: 0.05; }
+                    75% { transform: translateY(-30px) rotate(270deg); opacity: 0.1; }
+                    100% { transform: translateY(0) rotate(360deg); opacity: 0.05; }
+                }
+            `;
+            document.head.appendChild(moneyStyle);
+            
+            // 价格动画效果
+            const priceElement = document.querySelector('.total-price');
+            let priceOriginal = true;
+            
+            setInterval(() => {
+                if (priceOriginal) {
+                    priceElement.textContent = '$3,689';
+                    priceElement.style.color = '#ff3366';
+                    priceElement.style.textShadow = '0 0 60px rgba(255, 51, 102, 0.8)';
+                } else {
+                    priceElement.textContent = '$3,690';
+                    priceElement.style.color = '#ffd700';
+                    priceElement.style.textShadow = '0 0 50px rgba(255, 215, 0, 0.7)';
+                }
+                priceOriginal = !priceOriginal;
+            }, 3500);
+            
+            // 货币图标浮动序列
+            const currencyIcons = document.querySelectorAll('.currency-icon');
+            let iconDirection = 1;
+            
+            setInterval(() => {
+                currencyIcons.forEach((icon, index) => {
+                    const delay = index * 0.5;
+                    setTimeout(() => {
+                        icon.style.transform = `translateY(${iconDirection * -20}px)`;
+                        icon.style.transition = 'transform 1s ease';
+                    }, delay * 1000);
+                });
+                
+                iconDirection = iconDirection * -1;
+            }, 3000);
+            
+            // 重置图标位置
+            setInterval(() => {
+                currencyIcons.forEach(icon => {
+                    icon.style.transform = 'translateY(0)';
+                    icon.style.transition = 'transform 0.5s ease';
+                });
+            }, 6000);
+            
+            // 标题打字机效果
+            const heroTitle = document.querySelector('.hero-title');
+            const originalTitle = heroTitle.innerHTML;
+            heroTitle.innerHTML = '';
+            let titleIndex = 0;
+            
+            function typeTitle() {
+                if (titleIndex < originalTitle.length) {
+                    heroTitle.innerHTML += originalTitle.charAt(titleIndex);
+                    titleIndex++;
+                    setTimeout(typeTitle, 50);
+                }
+            }
+            
+            // 延迟开始打字效果
+            setTimeout(typeTitle, 1000);
+            
+            // 添加AI核心点击效果
+            const aiCore = document.querySelector('.ai-core');
+            aiCore.addEventListener('click', function() {
+                this.style.animationDuration = '0.5s';
+                this.style.boxShadow = '0 0 100px #00ff9d';
+                
+                setTimeout(() => {
+                    this.style.animationDuration = '5s';
+                    this.style.boxShadow = '';
+                }, 1000);
+                
+                // 创建脉冲效果
+                const pulse = document.createElement('div');
+                pulse.style.position = 'absolute';
+                pulse.style.width = '200px';
+                pulse.style.height = '200px';
+                pulse.style.borderRadius = '50%';
+                pulse.style.background = 'radial-gradient(circle, rgba(0, 255, 157, 0.3) 0%, transparent 70%)';
+                pulse.style.top = '50%';
+                pulse.style.left = '50%';
+                pulse.style.transform = 'translate(-50%, -50%)';
+                pulse.style.zIndex = '5';
+                pulse.style.animation = 'pulse-expand 1s forwards';
+                
+                document.querySelector('.ai-processor').appendChild(pulse);
+                
+                setTimeout(() => {
+                    pulse.remove();
+                }, 1000);
+            });
+            
+            // 添加脉冲扩展动画
+            const pulseStyle = document.createElement('style');
+            pulseStyle.textContent = `
+                @keyframes pulse-expand {
+                    0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+                    100% { transform: translate(-50%, -50%) scale(3); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(pulseStyle);
+        });
+    </script>
+</body>
+</html>
