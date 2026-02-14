@@ -49,6 +49,8 @@
             --text-muted: #8b9bb4;
             --card-bg: rgba(255, 255, 255, 0.03);
             --card-border: rgba(0, 255, 170, 0.2);
+            --success-green: #00ffaa;
+            --error-red: #ff7675;
         }
 
         * {
@@ -275,20 +277,26 @@
         /* 12. Token Assets: Hexagon */
         .a-token { width: 20px; height: 20px; background: var(--primary); clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); animation: pulse 2s infinite; }
 
-        /* --- PRICING --- */
-        .pricing-section {
-            padding: 60px 0;
-            text-align: center;
+        /* --- PRICING & ACTIONS --- */
+        .action-zone {
+            padding: 80px 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: stretch;
         }
 
         .pricing-box {
-            display: inline-block;
             background: rgba(2, 8, 15, 0.8);
             border: 1px solid var(--primary);
-            padding: 50px 80px;
+            padding: 50px 40px;
             border-radius: 24px;
             position: relative;
-            box-shadow: 0 0 80px rgba(0, 255, 170, 0.15);
+            box-shadow: 0 0 80px rgba(0, 255, 170, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
         }
 
         .pricing-box::before {
@@ -307,7 +315,7 @@
         }
 
         .price-tag {
-            font-size: 4.5rem;
+            font-size: 4rem;
             font-weight: 800;
             color: #fff;
             margin: 10px 0;
@@ -320,14 +328,9 @@
         }
         .installments span { color: var(--primary); font-weight: bold; }
 
-        .btn-group {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
         .btn {
+            display: inline-block;
+            width: 100%;
             padding: 18px 40px;
             border-radius: 12px;
             font-weight: 700;
@@ -337,6 +340,8 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             font-size: 0.9rem;
+            border: none;
+            margin-bottom: 10px;
         }
 
         .btn-buy {
@@ -359,11 +364,65 @@
             border-color: var(--secondary);
             color: var(--secondary);
         }
-        .btn-contact.copied {
+
+        /* Offer Form */
+        .offer-box {
+            background: rgba(2, 8, 15, 0.8);
+            border: 1px solid #333;
+            padding: 40px;
+            border-radius: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .offer-box h3 {
+            margin-bottom: 15px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            color: var(--text-main);
+        }
+
+        .form-group { margin-bottom: 15px; }
+        .offer-input {
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid #333;
+            color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+        .offer-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(0, 255, 170, 0.05);
+        }
+
+        .btn-submit {
+            background: transparent;
+            border: 1px solid var(--text-muted);
+            color: #fff;
+            width: 100%;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+        .btn-submit:hover {
             border-color: var(--primary);
             color: var(--primary);
-            background: rgba(0,255,170,0.1);
+            background: rgba(0, 255, 170, 0.1);
         }
+
+        #form-status { margin-top: 15px; font-size: 0.9rem; display: none; }
+        .status-success { color: var(--success-green); }
+        .status-error { color: var(--error-red); }
+
 
         /* Footer */
         footer {
@@ -388,7 +447,7 @@
 
         @media (max-width: 768px) {
             .brand-wrapper { font-size: 13vw; flex-direction: column; }
-            .pricing-box { padding: 30px 20px; width: 100%; }
+            .action-zone { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -418,96 +477,66 @@
             </div>
 
             <div class="grid">
-                <!-- 1 -->
-                <div class="card">
-                    <div class="icon-box"><div class="a-globe"></div></div>
-                    <h3>Global Remittance</h3>
-                    <p>Borderless money transfer.</p>
-                </div>
-                <!-- 2 -->
-                <div class="card">
-                    <div class="icon-box"><div class="a-ramp"><span></span></div></div>
-                    <h3>DeFi On-Ramp</h3>
-                    <p>Fiat entry to decentralization.</p>
-                </div>
-                <!-- 3 -->
-                <div class="card">
-                    <div class="icon-box"><div class="a-stream"><div></div><div></div><div></div></div></div>
-                    <h3>Payroll Streaming</h3>
-                    <p>Real-time salary flow.</p>
-                </div>
-                <!-- 4 -->
-                <div class="card">
-                    <div class="icon-box"><div class="a-game"></div></div>
-                    <h3>GameFi Economy</h3>
-                    <p>In-game asset monetization.</p>
-                </div>
-                <!-- 5 -->
-                <div class="card">
-                    <div class="icon-box"><div class="a-nft"></div></div>
-                    <h3>NFT Liquidity</h3>
-                    <p>Instant art-to-cash loans.</p>
-                </div>
-                <!-- 6 -->
-                <div class="card">
-                    <div class="icon-box"><div class="a-cross"></div></div>
-                    <h3>Cross-Border Pay</h3>
-                    <p>Instant international settlement.</p>
-                </div>
-                <!-- 7 -->
-                <div class="card">
-                    <div class="icon-box"><div class="a-stable"></div></div>
-                    <h3>Stablecoin Hub</h3>
-                    <p>Pegged asset management.</p>
-                </div>
-                <!-- 8 -->
-                <div class="card">
-                    <div class="icon-box"><div class="a-merch"></div></div>
-                    <h3>Merchant Gateway</h3>
-                    <p>Accept crypto at POS.</p>
-                </div>
-                <!-- 9 -->
-                <div class="card">
-                    <div class="icon-box"><div class="a-dao"><span></span><span></span><span></span><span></span></div></div>
-                    <h3>DAO Treasury</h3>
-                    <p>Community fund governance.</p>
-                </div>
-                <!-- 10 -->
-                <div class="card">
-                    <div class="icon-box"><div class="a-lend"><span></span><span></span><span></span></div></div>
-                    <h3>P2P Lending</h3>
-                    <p>Direct crypto borrowing.</p>
-                </div>
-                <!-- 11 -->
-                <div class="card">
-                    <div class="icon-box"><div class="a-wallet"></div></div>
-                    <h3>Digital Wallets</h3>
-                    <p>Next-gen neo-banking.</p>
-                </div>
-                <!-- 12 -->
-                <div class="card">
-                    <div class="icon-box"><div class="a-token"></div></div>
-                    <h3>Tokenized Assets</h3>
-                    <p>Real World Asset (RWA) ramp.</p>
-                </div>
+                <!-- 12 Cards -->
+                <div class="card"><div class="icon-box"><div class="a-globe"></div></div><h3>Global Remittance</h3><p>Borderless money transfer.</p></div>
+                <div class="card"><div class="icon-box"><div class="a-ramp"><span></span></div></div><h3>DeFi On-Ramp</h3><p>Fiat entry to decentralization.</p></div>
+                <div class="card"><div class="icon-box"><div class="a-stream"><div></div><div></div><div></div></div></div><h3>Payroll Streaming</h3><p>Real-time salary flow.</p></div>
+                <div class="card"><div class="icon-box"><div class="a-game"></div></div><h3>GameFi Economy</h3><p>In-game asset monetization.</p></div>
+                <div class="card"><div class="icon-box"><div class="a-nft"></div></div><h3>NFT Liquidity</h3><p>Instant art-to-cash loans.</p></div>
+                <div class="card"><div class="icon-box"><div class="a-cross"></div></div><h3>Cross-Border Pay</h3><p>Instant international settlement.</p></div>
+                <div class="card"><div class="icon-box"><div class="a-stable"></div></div><h3>Stablecoin Hub</h3><p>Pegged asset management.</p></div>
+                <div class="card"><div class="icon-box"><div class="a-merch"></div></div><h3>Merchant Gateway</h3><p>Accept crypto at POS.</p></div>
+                <div class="card"><div class="icon-box"><div class="a-dao"><span></span><span></span><span></span><span></span></div></div><h3>DAO Treasury</h3><p>Community fund governance.</p></div>
+                <div class="card"><div class="icon-box"><div class="a-lend"><span></span><span></span><span></span></div></div><h3>P2P Lending</h3><p>Direct crypto borrowing.</p></div>
+                <div class="card"><div class="icon-box"><div class="a-wallet"></div></div><h3>Digital Wallets</h3><p>Next-gen neo-banking.</p></div>
+                <div class="card"><div class="icon-box"><div class="a-token"></div></div><h3>Tokenized Assets</h3><p>Real World Asset (RWA) ramp.</p></div>
             </div>
         </section>
 
-        <!-- Pricing Section -->
-        <section class="pricing-section">
+        <!-- Pricing & Offer Section -->
+        <section class="action-zone">
+            
+            <!-- Price Box -->
             <div class="pricing-box">
                 <div class="price-tag">$369</div>
                 <div class="installments">Buy now or pay in <span>3 easy installments</span></div>
                 
-                <div class="btn-group">
-                    <a href="https://www.spaceship.com/s/buy/rampay.money/HkhsgcDv5J3Htb33" target="_blank" class="btn btn-buy" rel="noopener noreferrer">
-                        Purchase Domain
-                    </a>
-                    <button class="btn btn-contact" onclick="copyEmail(this)">
-                        Contact Seller
-                    </button>
-                </div>
+                <a href="https://www.spaceship.com/s/buy/rampay.money/HkhsgcDv5J3Htb33" target="_blank" class="btn btn-buy" rel="noopener noreferrer">
+                    Purchase Domain
+                </a>
+                <button class="btn btn-contact" onclick="copyEmail(this)">
+                    Copy Contact Email
+                </button>
             </div>
+
+            <!-- Offer Box -->
+            <div class="offer-box">
+                <h3>Make a Counter Offer</h3>
+                <p style="color: #888; font-size: 0.9rem; margin-bottom: 20px;">
+                    Price is negotiable. Enter your offer and email below. We will receive it instantly.
+                </p>
+
+                <!-- FormSubmit Configuration -->
+                <form id="offerForm" action="https://formsubmit.co/joshua369x@gmail.com" method="POST">
+                    <!-- HoneyPot to stop bots -->
+                    <input type="text" name="_honey" style="display:none">
+                    <!-- Disable Captcha for smoother experience -->
+                    <input type="hidden" name="_captcha" value="false">
+                    <!-- Email Subject Line -->
+                    <input type="hidden" name="_subject" value="New Offer for RamPay.money!">
+
+                    <div class="form-group">
+                        <input type="number" name="amount" class="offer-input" placeholder="Offer Amount ($ USD)" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" class="offer-input" placeholder="Your Email Address" required>
+                    </div>
+                    <button type="submit" class="btn btn-submit">Send Offer</button>
+                </form>
+
+                <div id="form-status"></div>
+            </div>
+
         </section>
 
         <!-- Footer -->
@@ -527,16 +556,58 @@
             navigator.clipboard.writeText(email).then(() => {
                 const originalText = btn.innerHTML;
                 btn.innerHTML = "✓ Email Copied";
-                btn.classList.add('copied');
+                btn.style.borderColor = "var(--primary)";
+                btn.style.color = "var(--primary)";
                 
                 setTimeout(() => {
                     btn.innerHTML = originalText;
-                    btn.classList.remove('copied');
+                    btn.style.borderColor = "#333";
+                    btn.style.color = "#fff";
                 }, 2500);
             }).catch(err => {
                 console.error('Error copying text: ', err);
             });
         }
+
+        // AJAX Form Submission (FormSubmit.co)
+        const form = document.getElementById('offerForm');
+        const statusDiv = document.getElementById('form-status');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const btn = form.querySelector('.btn-submit');
+            const originalBtnText = btn.innerText;
+            btn.innerText = "Sending...";
+            btn.disabled = true;
+
+            const formData = new FormData(form);
+
+            fetch("https://formsubmit.co/ajax/joshua369x@gmail.com", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                statusDiv.innerText = "✓ Offer Sent Successfully!";
+                statusDiv.className = "status-success";
+                statusDiv.style.display = "block";
+                form.reset();
+                btn.innerText = "Sent";
+                setTimeout(() => {
+                    btn.innerText = originalBtnText;
+                    btn.disabled = false;
+                }, 3000);
+            })
+            .catch(error => {
+                statusDiv.innerText = "⚠ Error sending offer. Please email joshua369x@gmail.com directly.";
+                statusDiv.className = "status-error";
+                statusDiv.style.display = "block";
+                btn.innerText = originalBtnText;
+                btn.disabled = false;
+                console.log(error);
+            });
+        });
 
         // Particle System (Money Flow Effect)
         const canvas = document.getElementById('flow-canvas');
